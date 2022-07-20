@@ -59,7 +59,7 @@ type SafeCacheWithLock[K comparable, V any] struct {
 	c int
 }
 
-// WithLock ロックを取った状態で指定された処理を事項
+// WithLock ロックを取った状態で指定された処理を実行
 func (c *SafeCache[K, V]) WithLock(callback func(c *SafeCacheWithLock[K, V]) error) (err error) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
