@@ -22,22 +22,23 @@ func NewTicker(durationSec int, callback func()) *Ticker {
 	}
 }
 
-// Start タイマーを開始
+/*
+Start タイマーを開始
+	必ずGoroutineとして実行して下さい
+*/
 func (t *Ticker) Start() {
 	t.t = time.NewTicker(t.d)
 	defer t.t.Stop()
 	defer close(t.s)
 
-	go func() {
-		for {
-			select {
-			case <-t.t.C:
-				go t.f()
-			case <-t.s:
-				return
-			}
+	for {
+		select {
+		case <-t.t.C:
+			go t.f()
+		case <-t.s:
+			return
 		}
-	}()
+	}
 }
 
 // Stop タイマーを停止
