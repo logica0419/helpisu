@@ -27,7 +27,7 @@ func NewCache[K comparable, V any](capacity int) *Cache[K, V] {
 // Get 指定したKeyのキャッシュを取得
 func (c *Cache[K, V]) Get(key K) (value V, ok bool) {
 	cache, _ := c.m.Get().(map[K]V)
-	c.m.Put(cache)
+	defer c.m.Put(cache)
 	value, ok = cache[key]
 
 	return
