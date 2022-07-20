@@ -18,7 +18,7 @@ type StringInt struct {
 // ErrInvalidType 不正な型が渡されたときに返すエラー
 var ErrInvalidType = errors.New("StringInt.Scan: invalid type")
 
-// NewStringInt 新しいStringIntを作成
+// NewStringInt 新たなStringIntを作成
 func NewStringInt(value int) StringInt {
 	return StringInt{
 		value: value,
