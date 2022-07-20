@@ -43,7 +43,9 @@ func (t *Ticker) Start() {
 
 // Stop タイマーを停止
 func (t *Ticker) Stop() {
-	t.s <- struct{}{}
+	if t.t != nil {
+		t.s <- struct{}{}
+	}
 }
 
 // Reset タイマーをリセット
