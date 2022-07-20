@@ -48,5 +48,7 @@ func (t *Ticker) Stop() {
 
 // Reset タイマーをリセット
 func (t *Ticker) Reset() {
-	t.t.Reset(t.d)
+	if t.t != nil {
+		t.t.Reset(t.d)
+	}
 }
