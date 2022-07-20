@@ -4,8 +4,7 @@ import "sync"
 
 /*
 Cache ジェネリックで、スレッドセーフなマップキャッシュ
-
-リセットしても初期キャパシティを記憶しています
+	リセットしても初期キャパシティを記憶しています
 */
 type Cache[K comparable, V any] struct {
 	m *sync.Pool

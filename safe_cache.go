@@ -4,10 +4,8 @@ import "sync"
 
 /*
 SafeCache ジェネリックで、スレッドセーフなマップキャッシュ
-
-Cacheと違い、ロックを取った状態で複数の操作ができます
-
-リセットしても初期キャパシティを記憶しています
+	Cacheと違い、ロックを取った状態で複数の操作ができます
+	リセットしても初期キャパシティを記憶しています
 */
 type SafeCache[K comparable, V any] struct {
 	mu sync.RWMutex
@@ -56,8 +54,7 @@ func (c *SafeCache[K, V]) Reset() {
 
 /*
 SafeCacheWithLock ロックが取れた状態のSafeCache
-
-必ず (*SafeCache[K, V]).WithLock のcallbackでのみ使用して下さい
+	必ず (*SafeCache[K, V]).WithLock のcallbackでのみ使用して下さい
 */
 type SafeCacheWithLock[K comparable, V any] struct {
 	m map[K]V

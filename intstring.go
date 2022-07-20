@@ -8,10 +8,8 @@ import (
 
 /*
 StringInt DBにはint型に、jsonにはstring型として認識される特殊な型
-
-PrimaryKeyをランダムなstringからauto incrementなintに変換する時などに使います
-
-中身の値を使いたいときは、Value()メソッドを使用して下さい
+	PrimaryKeyをランダムなstringからauto incrementなintに変換する時などに使います
+	中身の値を使いたいときは、Value()メソッドを使用して下さい
 */
 type StringInt struct {
 	value int
