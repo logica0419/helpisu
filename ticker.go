@@ -16,7 +16,7 @@ NewTicker 新たなTickerを作成
 */
 func NewTicker(durationMS int, callback func()) *Ticker {
 	return &Ticker{
-		d: time.Duration(durationMS) * time.MilliSecond,
+		d: time.Duration(durationMS) * time.Millisecond,
 		f: callback,
 		s: make(chan struct{}),
 	}
