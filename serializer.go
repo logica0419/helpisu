@@ -9,7 +9,7 @@ import (
 // sonicSerializer sonicを用いたecho用Jsonシリアライザ
 type sonicSerializer struct{}
 
-// NewSonicSerializer 新たなSonicSerializerを作成
+// NewSonicSerializer sonicを用いたecho用Jsonシリアライザを作成
 func NewSonicSerializer() echo.JSONSerializer {
 	return &sonicSerializer{}
 }
