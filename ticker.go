@@ -12,11 +12,11 @@ type Ticker struct {
 
 /*
 NewTicker 新たなTickerを作成
-	durationSecはタイマーの実行間隔を秒で指定して下さい
+	durationMSはタイマーの実行間隔をms単位で指定して下さい
 */
-func NewTicker(durationSec int, callback func()) *Ticker {
+func NewTicker(durationMS int, callback func()) *Ticker {
 	return &Ticker{
-		d: time.Duration(durationSec) * time.Second,
+		d: time.Duration(durationMS) * time.MilliSecond,
 		f: callback,
 		s: make(chan struct{}),
 	}
