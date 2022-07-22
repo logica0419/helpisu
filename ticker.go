@@ -29,7 +29,6 @@ Start タイマーを開始
 func (t *Ticker) Start() {
 	t.t = time.NewTicker(t.d)
 	defer t.t.Stop()
-	defer close(t.s)
 
 	for {
 		select {
