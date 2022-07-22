@@ -62,7 +62,7 @@ func (d *DBDisconnectDetector) Start() {
 
 /*
 Pause DBからの切断の検出を一時的に停止
-	検出はpauseSec秒後に再開します
+	検出は`pauseSec`秒後に再開します
 */
 func (d *DBDisconnectDetector) Pause() {
 	d.t.Stop()
