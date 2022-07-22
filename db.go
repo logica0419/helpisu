@@ -33,7 +33,6 @@ NewDBDisconnectDetector 新たなDBDisconnectDetectorを作成
 func NewDBDisconnectDetector(durationSec, pauseSec int, db *sql.DB) *DBDisconnectDetector {
 	return &DBDisconnectDetector{
 		t: NewTicker(durationSec*1000, func() {
-			log.Println("check DB connection")
 			err := db.Ping()
 			if err != nil {
 				log.Panic("DB disconnected")
