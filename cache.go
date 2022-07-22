@@ -1,6 +1,9 @@
 package helpisu
 
-import "sync"
+import (
+	"runtime"
+	"sync"
+)
 
 /*
 Cache ジェネリックで、スレッドセーフなマップキャッシュ
@@ -48,5 +51,5 @@ func (c *Cache[K, V]) Delete(key K) {
 
 // Reset 全てのキャッシュを削除
 func (c *Cache[K, V]) Reset() {
-	c.m.Put(make(map[K]V, c.c))
+	runtime.GC()
 }
