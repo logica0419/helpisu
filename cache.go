@@ -1,6 +1,8 @@
 package helpisu
 
-import "sync"
+import (
+	"sync"
+)
 
 /*
 Cache ジェネリックで、スレッドセーフなマップキャッシュ
@@ -48,5 +50,10 @@ func (c *Cache[K, V]) Delete(key K) {
 
 // Reset 全てのキャッシュを削除
 func (c *Cache[K, V]) Reset() {
-	c.m.Put(make(map[K]V, c.c))
+	cache, _ := c.m.Get().(map[K]V)
+	for key := range cache {
+		delete(cache, key)
+	}
+
+	c.m.Put(cache)
 }
