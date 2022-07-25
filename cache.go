@@ -63,6 +63,19 @@ func (c *Cache[K, V]) Delete(key K) {
 	c.m.Delete(key)
 }
 
+// ForEach キャッシュの全ての要素に対して処理を行う
+func (c *Cache[K, V]) ForEach(f func(key K, value V) error) (err error) {
+	c.m.Range(func(key, value interface{}) bool {
+		k, _ := key.(K)
+		v, _ := value.(V)
+
+		err = f(k, v)
+		return err == nil
+	})
+
+	return
+}
+
 // Reset 全てのキャッシュを削除
 func (c *Cache[K, V]) Reset() {
 	c.m = &sync.Map{}
