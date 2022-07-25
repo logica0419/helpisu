@@ -31,24 +31,24 @@ func NewCache[K comparable, V any]() *Cache[K, V] {
 
 // Get 指定したKeyのキャッシュを取得
 func (c *Cache[K, V]) Get(key K) (value V, ok bool) {
-	cache, ok := c.m.Load(key)
+	v, ok := c.m.Load(key)
 	if !ok {
 		return
 	}
 
-	value, ok = cache.(V)
+	value, ok = v.(V)
 
 	return
 }
 
 // GetAndDelete 指定したKeyのキャッシュを取得して削除
 func (c *Cache[K, V]) GetAndDelete(key K) (value V, ok bool) {
-	cache, ok := c.m.LoadAndDelete(key)
+	v, ok := c.m.LoadAndDelete(key)
 	if !ok {
 		return
 	}
 
-	value, ok = cache.(V)
+	value, ok = v.(V)
 
 	return
 }
