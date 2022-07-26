@@ -20,7 +20,7 @@ func WaitDBStartUp(db *sql.DB) {
 
 // DBDisconnectDetector DBから切断されるとアプリを強制終了する検出器
 type DBDisconnectDetector struct {
-	db *sql.DB
+	db []*sql.DB
 	d  int
 	t  *Ticker
 	r  time.Duration
@@ -34,36 +34,36 @@ NewDBDisconnectDetector 新たなDBDisconnectDetectorを作成
 	pauseSecは`Pause()`してから検出を再開するまでの時間をs単位で指定して下さい
 */
 func NewDBDisconnectDetector(durationSec, pauseSec int) *DBDisconnectDetector {
-	return &DBDisconnectDetector{
+	d := DBDisconnectDetector{
+		db: make([]*sql.DB, 0),
 		d:  durationSec,
 		r:  time.Second * time.Duration(pauseSec),
 		s:  make(chan struct{}),
 		st: false,
 	}
+
+	d.t = NewTicker(d.d, func() {
+		for _, db := range d.db {
+			err := db.Ping()
+			if err != nil {
+				log.Panic("DB disconnected")
+			}
+		}
+	})
+
+	return &d
 }
 
 // RegisterDB DBをDBDisconnectDetectorに登録
 func (d *DBDisconnectDetector) RegisterDB(db *sql.DB) {
-	d.db = db
-	d.t = NewTicker(d.d*1000, func() {
-		log.Println("DB check")
-		err := d.db.Ping()
-		if err != nil {
-			log.Panic("DB disconnected")
-		}
-	})
+	d.db = append(d.db, db)
 }
 
 /*
 Start DBからの切断の検出を開始
-	DBが登録されてない場合はPanicします
 	必ずGoroutineとして実行して下さい
 */
 func (d *DBDisconnectDetector) Start() {
-	if d.db == nil {
-		log.Panic("DB not registered")
-	}
-
 	d.st = true
 	d.t.Start()
 
