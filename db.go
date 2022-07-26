@@ -21,7 +21,6 @@ func WaitDBStartUp(db *sql.DB) {
 // DBDisconnectDetector DBから切断されるとアプリを強制終了する検出器
 type DBDisconnectDetector struct {
 	db []*sql.DB
-	d  int
 	t  *Ticker
 	r  time.Duration
 	s  chan struct{}
@@ -36,13 +35,12 @@ NewDBDisconnectDetector 新たなDBDisconnectDetectorを作成
 func NewDBDisconnectDetector(durationSec, pauseSec int) *DBDisconnectDetector {
 	d := DBDisconnectDetector{
 		db: make([]*sql.DB, 0),
-		d:  durationSec,
 		r:  time.Second * time.Duration(pauseSec),
 		s:  make(chan struct{}),
 		st: false,
 	}
 
-	d.t = NewTicker(d.d*1000, func() {
+	d.t = NewTicker(durationSec*1000, func() {
 		for _, db := range d.db {
 			err := db.Ping()
 			if err != nil {
