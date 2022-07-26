@@ -42,7 +42,7 @@ func NewDBDisconnectDetector(durationSec, pauseSec int) *DBDisconnectDetector {
 		st: false,
 	}
 
-	d.t = NewTicker(d.d, func() {
+	d.t = NewTicker(d.d*1000, func() {
 		for _, db := range d.db {
 			err := db.Ping()
 			if err != nil {
