@@ -12,6 +12,7 @@ var generatedCaches = []resetter{}
 
 /*
 Cache ジェネリックで、スレッドセーフなマップキャッシュ
+
 	sync.Mapのジェネリックなラッパーです
 */
 type Cache[K comparable, V any] struct {

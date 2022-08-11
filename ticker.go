@@ -12,6 +12,7 @@ type Ticker struct {
 
 /*
 NewTicker 新たなTickerを作成
+
 	durationMSはタイマーの実行間隔をms単位で指定して下さい
 */
 func NewTicker(durationMS int, callback func()) *Ticker {
@@ -24,6 +25,7 @@ func NewTicker(durationMS int, callback func()) *Ticker {
 
 /*
 Start タイマーを開始
+
 	必ずGoroutineとして実行して下さい
 */
 func (t *Ticker) Start() {

@@ -29,6 +29,7 @@ type DBDisconnectDetector struct {
 
 /*
 NewDBDisconnectDetector 新たなDBDisconnectDetectorを作成
+
 	durationSecは接続確認の実行間隔をs単位で指定して下さい
 	pauseSecは`Pause()`してから検出を再開するまでの時間をs単位で指定して下さい
 */
@@ -59,6 +60,7 @@ func (d *DBDisconnectDetector) RegisterDB(db *sql.DB) {
 
 /*
 Start DBからの切断の検出を開始
+
 	必ずGoroutineとして実行して下さい
 */
 func (d *DBDisconnectDetector) Start() {
@@ -79,6 +81,7 @@ func (d *DBDisconnectDetector) Start() {
 
 /*
 Pause DBからの切断の検出を一時的に停止
+
 	検出は`pauseSec`秒後に再開します
 */
 func (d *DBDisconnectDetector) Pause() {
