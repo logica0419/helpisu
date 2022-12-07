@@ -6,7 +6,7 @@ import (
 )
 
 /*
-NewUUID 新たなUUIDを作成
+NewUUID 新たなUUID(v4)を作成
 
 	36文字のstring形式で返します
 */
