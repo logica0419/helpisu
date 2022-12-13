@@ -3,7 +3,7 @@ module github.com/logica0419/helpisu
 go 1.19
 
 require (
-	github.com/bytedance/sonic v1.5.0
+	github.com/bytedance/sonic v1.6.0
 	github.com/google/uuid v1.3.0
 	github.com/labstack/echo/v4 v4.9.1
 	github.com/oklog/ulid/v2 v2.1.0
@@ -11,7 +11,7 @@ require (
 )
 
 require (
-	github.com/chenzhuoyu/base64x v0.0.0-20211019084208-fb5309c8db06 // indirect
+	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/labstack/gommon v0.4.0 // indirect
