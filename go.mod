@@ -3,7 +3,7 @@ module github.com/logica0419/helpisu
 go 1.19
 
 require (
-	github.com/bytedance/sonic v1.8.1
+	github.com/bytedance/sonic v1.8.2
 	github.com/google/uuid v1.3.0
 	github.com/labstack/echo/v4 v4.10.2
 	github.com/oklog/ulid/v2 v2.1.0
