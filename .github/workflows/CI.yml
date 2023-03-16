@@ -26,7 +26,7 @@ jobs:
           key: mod-${{ hashFiles('**/go.sum') }}
       - name: Setup Go
         if: steps.mod-cache.outputs.cache-hit != 'true'
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
           go-version: ${{ env.GO_VERSION }}
       - name: Module Download
@@ -48,7 +48,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
           go-version: ${{ env.GO_VERSION }}
       - name: Set Mod Cache
@@ -66,7 +66,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
           go-version: ${{ env.GO_VERSION }}
       - name: Set Mod Cache
