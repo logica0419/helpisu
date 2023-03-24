@@ -15,7 +15,7 @@ func NewSonicSerializer() echo.JSONSerializer {
 }
 
 // Serialize シリアライズ
-func (s *sonicSerializer) Serialize(c echo.Context, i interface{}, indent string) error {
+func (s *sonicSerializer) Serialize(c echo.Context, i interface{}, _ string) error {
 	enc := encoder.NewStreamEncoder(c.Response())
 	return enc.Encode(i)
 }
