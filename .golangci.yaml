@@ -1,77 +1,30 @@
 linters:
-  enable:
-    - errcheck
-    - gosimple
-    - govet
-    - ineffassign
-    - staticcheck
-    - typecheck
-    - unused
-
-    - asciicheck
-    - bidichk
-    - bodyclose
-    - containedctx
-    - contextcheck
-    - cyclop
-    - decorder
+  enable-all: true
+  disable:
+    - deadcode # deprecated
     - depguard
-    - dogsled
-    - dupl
-    - durationcheck
-    - errchkjson
-    - errname
-    - errorlint
-    - exhaustive
-    - exportloopref
-    - forcetypeassert
-    - gocognit
-    - goconst
-    - gocyclo
-    - godox
-    - goerr113
-    - gofmt
-    - gofumpt
-    - goheader
-    - goimports
-    - gomoddirectives
-    - gomodguard
-    - goprintffuncname
-    - gosec
-    - grouper
-    - importas
-    - lll
-    - maintidx
-    - makezero
-    - misspell
-    - nakedret
-    - nestif
-    - nilerr
-    - nilnil
-    - noctx
+    - exhaustivestruct # deprecated
+    - gochecknoglobals
+    - godot
+    - golint # deprecated
+    - ifshort # deprecated
+    - interfacer # deprecated
+    - ireturn
+    - maligned # deprecated
     - nolintlint
-    - paralleltest
-    - prealloc
-    - predeclared
-    - promlinter
-    - revive
-    - rowserrcheck
-    - sqlclosecheck
-    - stylecheck
-    - tagliatelle
-    - tenv
-    - testpackage
-    - thelper
-    - tparallel
-    - unconvert
-    - unparam
-    - wastedassign
-    - whitespace
-    - wsl
+    - nonamedreturns
+    - nosnakecase # deprecated
+    - scopelint # deprecated
+    - structcheck # deprecated
+    - varcheck # deprecated
+    - wrapcheck
 
 linters-settings:
   lll:
     line-length: 150
+  varnamelen:
+    ignore-names:
+      - tt
 
 issues:
   exclude-use-default: false
