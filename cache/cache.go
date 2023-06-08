@@ -24,16 +24,16 @@ type Cache[K comparable, V any] struct {
 
 // New 新たなCacheを作成
 func New[K comparable, V any]() *Cache[K, V] {
-	c := Cache[K, V]{
+	cache := Cache[K, V]{
 		m: &sync.Map{},
 		s: nil,
 		d: nil,
 		r: nil,
 	}
 
-	generatedCaches = append(generatedCaches, &c)
+	generatedCaches = append(generatedCaches, &cache)
 
-	return &c
+	return &cache
 }
 
 // Get 指定したKeyのキャッシュを取得
@@ -85,6 +85,7 @@ func (c *Cache[K, V]) ForEach(f func(key K, value V) error) (err error) {
 		v, _ := value.(V)
 
 		err = f(k, v)
+
 		return err == nil
 	})
 

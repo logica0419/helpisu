@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+const dbStartUpWaitSec = 2
+
 // WaitDBStartUp DBの起動を待機
 func WaitDBStartUp(db *sql.DB) {
 	for {
@@ -14,7 +16,7 @@ func WaitDBStartUp(db *sql.DB) {
 			break
 		}
 
-		time.Sleep(time.Second * 2)
+		time.Sleep(dbStartUpWaitSec * time.Second)
 	}
 }
 
@@ -34,15 +36,17 @@ NewDBDisconnectDetector 新たなDBDisconnectDetectorを作成
 	pauseSecは`Pause()`してから検出を再開するまでの時間をs単位で指定して下さい
 */
 func NewDBDisconnectDetector(durationSec, pauseSec int) *DBDisconnectDetector {
-	d := DBDisconnectDetector{
+	det := DBDisconnectDetector{
 		db: make([]*sql.DB, 0),
+		t:  nil,
 		r:  time.Second * time.Duration(pauseSec),
 		s:  make(chan struct{}),
 		st: false,
 	}
 
-	d.t = NewTicker(durationSec*1000, func() {
-		for _, db := range d.db {
+	// nolint:gomnd
+	det.t = NewTicker(durationSec*1000, func() {
+		for _, db := range det.db {
 			err := db.Ping()
 			if err != nil {
 				log.Panic("DB disconnected")
@@ -50,7 +54,7 @@ func NewDBDisconnectDetector(durationSec, pauseSec int) *DBDisconnectDetector {
 		}
 	})
 
-	return &d
+	return &det
 }
 
 // RegisterDB DBをDBDisconnectDetectorに登録
@@ -71,7 +75,9 @@ func (d *DBDisconnectDetector) Start() {
 		select {
 		case <-d.s:
 			d.st = false
+
 			return
+
 		default:
 			time.Sleep(d.r)
 			d.t.Start()
