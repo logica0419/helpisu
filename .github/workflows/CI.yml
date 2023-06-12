@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3.5.0
+        uses: golangci/golangci-lint-action@v3.6.0
   build:
     name: Build
     runs-on: ubuntu-latest
