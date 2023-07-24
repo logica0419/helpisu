@@ -2,21 +2,21 @@ linters:
   enable-all: true
   disable:
     - deadcode # deprecated
-    - depguard
     - exhaustivestruct # deprecated
-    - gochecknoglobals
-    - godot
     - golint # deprecated
     - ifshort # deprecated
     - interfacer # deprecated
-    - ireturn
     - maligned # deprecated
-    - nolintlint
-    - nonamedreturns
     - nosnakecase # deprecated
     - scopelint # deprecated
     - structcheck # deprecated
     - varcheck # deprecated
+    - depguard
+    - gochecknoglobals
+    - godot
+    - ireturn
+    - nolintlint
+    - nonamedreturns
     - wrapcheck
 
 linters-settings:
