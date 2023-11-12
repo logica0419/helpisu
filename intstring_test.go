@@ -9,13 +9,14 @@ import (
 
 	"github.com/logica0419/helpisu"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestStringInt_UnmarshalJSON(t *testing.T) {
 	t.Parallel()
 
 	randNum, err := rand.Int(rand.Reader, big.NewInt(2147483647))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	type fields struct {
 		value int
@@ -39,7 +40,7 @@ func TestStringInt_UnmarshalJSON(t *testing.T) {
 			},
 			assertion: func(t *testing.T, si helpisu.StringInt, err error) {
 				t.Helper()
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				assert.Equal(t, int(randNum.Int64()), si.Value())
 			},
 		},
@@ -52,7 +53,7 @@ func TestStringInt_UnmarshalJSON(t *testing.T) {
 			},
 			assertion: func(t *testing.T, si helpisu.StringInt, err error) {
 				t.Helper()
-				assert.Error(t, err)
+				require.Error(t, err)
 			},
 		},
 	}
@@ -78,7 +79,7 @@ func TestStringInt_MarshalJSON(t *testing.T) {
 	t.Parallel()
 
 	randNum, err := rand.Int(rand.Reader, big.NewInt(2147483647))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	type fields struct {
 		value int
@@ -94,7 +95,7 @@ func TestStringInt_MarshalJSON(t *testing.T) {
 			},
 			assertion: func(t *testing.T, data []byte, err error) {
 				t.Helper()
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				assert.Equal(t, fmt.Sprintf(`{"value":"%d"}`, randNum), string(data))
 			},
 		},
@@ -120,7 +121,7 @@ func TestStringInt_Scan(t *testing.T) {
 	t.Parallel()
 
 	randNum, err := rand.Int(rand.Reader, big.NewInt(2147483647))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	type fields struct {
 		value int
@@ -144,7 +145,7 @@ func TestStringInt_Scan(t *testing.T) {
 			},
 			assertion: func(t *testing.T, si helpisu.StringInt, err error) {
 				t.Helper()
-				assert.NoError(t, err)
+				require.NoError(t, err)
 				assert.Equal(t, int(randNum.Int64()), si.Value())
 			},
 		},
@@ -157,7 +158,7 @@ func TestStringInt_Scan(t *testing.T) {
 			},
 			assertion: func(t *testing.T, si helpisu.StringInt, err error) {
 				t.Helper()
-				assert.Error(t, err)
+				require.Error(t, err)
 				assert.Equal(t, err, helpisu.ErrInvalidType)
 			},
 		},
@@ -179,7 +180,7 @@ func TestStringInt_Value(t *testing.T) {
 	t.Parallel()
 
 	randNum, err := rand.Int(rand.Reader, big.NewInt(2147483647))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	type fields struct {
 		value int
