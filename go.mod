@@ -4,7 +4,7 @@ go 1.21.4
 
 require (
 	github.com/bytedance/sonic v1.10.2
-	github.com/google/uuid v1.4.0
+	github.com/google/uuid v1.5.0
 	github.com/labstack/echo/v4 v4.11.3
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/stretchr/testify v1.8.4
