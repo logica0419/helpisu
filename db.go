@@ -29,6 +29,8 @@ type DBDisconnectDetector struct {
 	st bool
 }
 
+const msInSec = 1000
+
 /*
 NewDBDisconnectDetector 新たなDBDisconnectDetectorを作成
 
@@ -45,7 +47,7 @@ func NewDBDisconnectDetector(durationSec, pauseSec int) *DBDisconnectDetector {
 	}
 
 	// nolint:gomnd
-	det.t = NewTicker(durationSec*1000, func() {
+	det.t = NewTicker(durationSec*msInSec, func() {
 		for _, db := range det.db {
 			err := db.Ping()
 			if err != nil {

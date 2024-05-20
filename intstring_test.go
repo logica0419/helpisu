@@ -51,7 +51,7 @@ func TestStringInt_UnmarshalJSON(t *testing.T) {
 			args: args{
 				data: []byte(fmt.Sprintf(`{"value":%d}`, randNum)),
 			},
-			assertion: func(t *testing.T, si helpisu.StringInt, err error) {
+			assertion: func(t *testing.T, _ helpisu.StringInt, err error) {
 				t.Helper()
 				require.Error(t, err)
 			},
@@ -63,6 +63,7 @@ func TestStringInt_UnmarshalJSON(t *testing.T) {
 
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
+
 			si := helpisu.NewStringInt(tt.fields.value)
 			data := struct {
 				Value helpisu.StringInt `json:"value"`
@@ -106,6 +107,7 @@ func TestStringInt_MarshalJSON(t *testing.T) {
 
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
+
 			si := helpisu.NewStringInt(tt.fields.value)
 			data, err := json.Marshal(struct {
 				Value helpisu.StringInt `json:"value"`
@@ -156,7 +158,7 @@ func TestStringInt_Scan(t *testing.T) {
 			args: args{
 				value: "",
 			},
-			assertion: func(t *testing.T, si helpisu.StringInt, err error) {
+			assertion: func(t *testing.T, _ helpisu.StringInt, err error) {
 				t.Helper()
 				require.Error(t, err)
 				assert.Equal(t, err, helpisu.ErrInvalidType)
@@ -169,6 +171,7 @@ func TestStringInt_Scan(t *testing.T) {
 
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
+
 			si := helpisu.NewStringInt(tt.fields.value)
 			err := si.Scan(tt.args.value)
 			tt.assertion(t, si, err)
@@ -206,6 +209,7 @@ func TestStringInt_Value(t *testing.T) {
 
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
+
 			si := helpisu.NewStringInt(tt.fields.value)
 			tt.assertion(t, si.Value())
 		})
