@@ -44,7 +44,7 @@ func (si *StringInt) UnmarshalJSON(data []byte) error {
 }
 
 // MarshalJSON json.Marshalerの実装
-func (si StringInt) MarshalJSON() ([]byte, error) {
+func (si *StringInt) MarshalJSON() ([]byte, error) {
 	str := strconv.Itoa(si.value)
 
 	return json.Marshal(str)
@@ -63,6 +63,6 @@ func (si *StringInt) Scan(value any) error {
 }
 
 // Value sql.Valuerの実装
-func (si StringInt) Value() int {
+func (si *StringInt) Value() int {
 	return si.value
 }

@@ -1,6 +1,7 @@
 package helpisu
 
 import (
+	"context"
 	"database/sql"
 	"log"
 	"time"
@@ -9,9 +10,9 @@ import (
 const dbStartUpWaitSec = 2
 
 // WaitDBStartUp DBの起動を待機
-func WaitDBStartUp(db *sql.DB) {
+func WaitDBStartUp(ctx context.Context, db *sql.DB) {
 	for {
-		err := db.Ping()
+		err := db.PingContext(ctx)
 		if err == nil {
 			break
 		}
@@ -37,7 +38,7 @@ NewDBDisconnectDetector 新たなDBDisconnectDetectorを作成
 	durationSecは接続確認の実行間隔をs単位で指定して下さい
 	pauseSecは`Pause()`してから検出を再開するまでの時間をs単位で指定して下さい
 */
-func NewDBDisconnectDetector(durationSec, pauseSec int) *DBDisconnectDetector {
+func NewDBDisconnectDetector(ctx context.Context, durationSec, pauseSec int) *DBDisconnectDetector {
 	det := DBDisconnectDetector{
 		db: make([]*sql.DB, 0),
 		t:  nil,
@@ -49,7 +50,7 @@ func NewDBDisconnectDetector(durationSec, pauseSec int) *DBDisconnectDetector {
 	// nolint:gomnd
 	det.t = NewTicker(durationSec*msInSec, func() {
 		for _, db := range det.db {
-			err := db.Ping()
+			err := db.PingContext(ctx)
 			if err != nil {
 				log.Panic("DB disconnected")
 			}
@@ -107,6 +108,7 @@ func (d *DBDisconnectDetector) Stop() {
 	}
 
 	d.t.Stop()
+
 	d.s <- struct{}{}
 }
 

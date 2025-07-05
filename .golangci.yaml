@@ -1,16 +1,7 @@
+version: "2"
 linters:
-  enable-all: true
+  default: all
   disable:
-    - deadcode # deprecated
-    - exhaustivestruct # deprecated
-    - golint # deprecated
-    - ifshort # deprecated
-    - interfacer # deprecated
-    - maligned # deprecated
-    - nosnakecase # deprecated
-    - scopelint # deprecated
-    - structcheck # deprecated
-    - varcheck # deprecated
     - depguard
     - gochecknoglobals
     - godot
@@ -18,18 +9,23 @@ linters:
     - nolintlint
     - nonamedreturns
     - wrapcheck
-
-linters-settings:
-  lll:
-    line-length: 150
-  varnamelen:
-    ignore-names:
-      - tt
-
-issues:
-  exclude-use-default: false
-  exclude-rules:
-    - path: _test\.go
-      linters:
-        - containedctx
-        - funlen
+    - wsl
+  settings:
+    lll:
+      line-length: 150
+    varnamelen:
+      ignore-names:
+        - tt
+  exclusions:
+    generated: lax
+    rules:
+      - linters:
+          - containedctx
+          - funlen
+        path: _test\.go
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports

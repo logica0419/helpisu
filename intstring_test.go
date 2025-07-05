@@ -97,7 +97,7 @@ func TestStringInt_MarshalJSON(t *testing.T) {
 			assertion: func(t *testing.T, data []byte, err error) {
 				t.Helper()
 				require.NoError(t, err)
-				assert.Equal(t, fmt.Sprintf(`{"value":"%d"}`, randNum), string(data))
+				assert.JSONEq(t, fmt.Sprintf(`{"value":"%d"}`, randNum), string(data))
 			},
 		},
 	}
