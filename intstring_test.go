@@ -59,8 +59,6 @@ func TestStringInt_UnmarshalJSON(t *testing.T) {
 	}
 
 	for name, tt := range tests {
-		name, tt := name, tt
-
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
@@ -103,8 +101,6 @@ func TestStringInt_MarshalJSON(t *testing.T) {
 	}
 
 	for name, tt := range tests {
-		name, tt := name, tt
-
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
@@ -167,8 +163,6 @@ func TestStringInt_Scan(t *testing.T) {
 	}
 
 	for name, tt := range tests {
-		name, tt := name, tt
-
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
@@ -205,8 +199,6 @@ func TestStringInt_Value(t *testing.T) {
 	}
 
 	for name, tt := range tests {
-		name, tt := name, tt
-
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
